@@ -1,0 +1,12 @@
+name: peakhealth
+version: 0.0.1
+description: Demo API
+keywords:
+- peakhealth
+- api
+sources:
+- https://github.com/kuberlab/peakhealth
+maintainers:
+- name: Vadim Grishin
+  email: vgrishin@3palynet.com
+engine: gotpl

@@ -1,0 +1,28 @@
+image: kuberlab/peakhealth:latest
+imagePullPolicy: IfNotPresent
+serviceType: LoadBalancer
+
+ingress:
+    enabled: false
+    hostname: peakhealth.local
+
+    ## Ingress annotations
+    ##
+    # annotations:
+    #   kubernetes.io/ingress.class: nginx
+
+    ## Ingress TLS configuration
+    ## Secrets must be manually created in the namespace
+    ##
+    # tls:
+    #   - secretName: peakhealth.local-tls
+    #     hosts:
+    #       - peakhealth.local
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
