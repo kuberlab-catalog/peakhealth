@@ -1,5 +1,5 @@
 image: kuberlab/peakhealth:latest
-imagePullPolicy: IfNotPresent
+imagePullPolicy: Always
 serviceType: LoadBalancer
 
 ingress:
