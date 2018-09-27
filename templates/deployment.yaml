@@ -33,5 +33,15 @@ spec:
             port: http
           initialDelaySeconds: 5
           timeoutSeconds: 1
+        env:
+        - name: DB_TYPE
+          value: postgresql
+        - name: PG_HOST
+          value: postgresql
+        - name: PG_PWD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql
+              key: postgres-password
         resources:
 {{ toYaml .Values.resources | indent 10 }}

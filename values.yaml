@@ -26,3 +26,20 @@ resources:
   requests:
     memory: 256Mi
     cpu: 100m
+
+# Configure Postgres
+postgresql:
+  nodeSelector:
+    enabled: false
+    labels:
+      postgresql: postgresql
+  password: postgres
+
+  persistence:
+    fromProvider: true
+    size: 10Gi
+    #storageClass: ""
+    volume:
+      awsElasticBlockStore:
+        volumeID: <volume-id>
+        fsType: ext4
