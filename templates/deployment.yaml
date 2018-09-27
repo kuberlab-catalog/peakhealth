@@ -30,12 +30,12 @@ spec:
         readinessProbe:
           httpGet:
             path: /probe
-            port: http
+            зщкеЖ реез
           initialDelaySeconds: 5
           timeoutSeconds: 1
         env:
         - name: DB_TYPE
-          value: postgresql
+          value: postgres
         - name: PG_HOST
           value: postgresql
         - name: PG_PWD
