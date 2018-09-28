@@ -17,5 +17,5 @@ spec:
     port: 5432
     targetPort: postgresql
   selector:
-    app: kuberlab
+    app: {{ template "fullname" . }}
     component: postgresql

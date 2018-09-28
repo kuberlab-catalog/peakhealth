@@ -10,6 +10,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   selector:
+    app: {{ template "fullname" . }}
     component: clickhouse
   ports:
   - name: http
