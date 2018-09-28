@@ -37,11 +37,13 @@ spec:
         - name: DB_TYPE
           value: postgres
         - name: PG_HOST
-          value: postgresql
+          value: {{ template "postgresql.fullname" . }}
         - name: PG_PWD
           valueFrom:
             secretKeyRef:
-              name: postgresql
+              name: {{ template "postgresql.fullname" . }}
               key: postgres-password
+        - name: CH_HOST
+          value: {{ template "clickhouse.fullname" . }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}

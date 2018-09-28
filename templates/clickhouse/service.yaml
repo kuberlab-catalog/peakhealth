@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "clickhouse.fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    component: clickhouse
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    component: clickhouse
+  ports:
+  - name: http
+    port: 8123
+    targetPort: 8123
+    protocol: TCP
+  - name: native
+    port: 9000
+    targetPort: 9000
+    protocol: TCP

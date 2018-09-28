@@ -1,27 +1,29 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgresql
+  name: {{ template "postgresql.fullname" . }}
   labels:
-    app: kuberlab
+    app: {{ template "fullname" . }}
     component: postgresql
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   template:
     metadata:
       labels:
-        app: kuberlab
-        component: postgresql
+        app: {{ template "fullname" . }}
     spec:
-      {{- if .Values.nodeSelector.enabled }}
+      {{- if .Values.postgresql.nodeSelector.enabled }}
       nodeSelector:
-      {{- range $key, $value := .Values.nodeSelector.labels }}
+      {{- range $key, $value := .Values.postgresql.nodeSelector.labels }}
         {{ $key }}: "{{ $value }}"
       {{- end }}
       {{- end }}
       containers:
       - name: postgresql
-        image: "postgres:9.5.4"
-        imagePullPolicy: IfNotPresent
+        image: "{{ .Values.postgresql.image }}"
+        imagePullPolicy: "{{ .Values.postgresql.imagePullPolicy }}"
         env:
         - name: POSTGRES_USER
           value: postgres
@@ -62,8 +64,8 @@ spec:
           periodSeconds: 5
         volumeMounts:
           - name: data
-            mountPath: /var/lib/postgresql/data/pgdata
-            subPath: dealer-db
+            mountPath: /var/lib/postgresql/data/pgdata/
+            subPath: peakhealth-pgdb
       - name: metrics
         image: "wrouesnel/postgres_exporter:v0.1.1"
         imagePullPolicy: IfNotPresent
@@ -81,7 +83,7 @@ spec:
       - name: data
         {{- if .Values.persistence.fromProvider }}
         persistentVolumeClaim:
-          claimName: postgresql
+          claimName: {{ template "fullname" . }}
         {{- else }}
 {{ toYaml .Values.persistence.volume | indent 8 }}
         {{- end }}
