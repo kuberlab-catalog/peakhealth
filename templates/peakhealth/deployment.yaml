@@ -41,7 +41,7 @@ spec:
         - name: PG_PWD
           valueFrom:
             secretKeyRef:
-              name: {{ template "postgresql.fullname" . }}
+              name: {{ template "fullname" . }}
               key: postgres-password
         - name: CH_HOST
           value: {{ template "clickhouse.fullname" . }}
