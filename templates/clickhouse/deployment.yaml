@@ -22,14 +22,7 @@ spec:
       initContainers:
       - name: chown
         image: alpine:3.6
-        command: ['/bin/sh', '-c', 'chown 105:106 -R /var/lib/clickhouse']
-        volumeMounts:
-        - name: clickhouse-data
-          mountPath: /var/lib/clickhouse/
-          subPath: peakhealth-chdb
-      - name: wait
-        image: alpine:3.6
-        command: ['sleep', '10000']
+        command: ['/bin/sh', '-c', 'chmod 0777 /var/lib/clickhouse']
         volumeMounts:
         - name: clickhouse-data
           mountPath: /var/lib/clickhouse/
