@@ -78,7 +78,7 @@ spec:
             claimName: {{ template "fullname" . }}
         - name: config-volume
           configMap:
-            name: clickhouse-config
+            name: {{ template "clickhouse.fullname" . }}
 {{- if .Values.tolerations }}
       tolerations:
       - operator: {{ .Values.tolerations.operator | quote }}
