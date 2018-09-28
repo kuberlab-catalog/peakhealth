@@ -36,19 +36,6 @@ spec:
           containerPort: 8123
         - name: native
           containerPort: 9000
-        env:
-        - name: CLICKHOUSE_SERVER
-          value: {{ .Values.clickhouse.server | quote }}
-        - name: CLICKHOUSE_PORT
-          value: {{ .Values.clickhouse.port | quote }}
-        - name: CLICKHOUSE_USER
-          value: {{ .Values.clickhouse.user | quote }}
-        - name: CLICKHOUSE_PASS
-          value: {{ .Values.clickhouse_pass_original | quote }}
-        - name: CLICKHOUSE_DB
-          value: {{ .Values.clickhouse.db | quote }}
-        - name: K8S_LOGS_TABLE
-          value: {{ .Values.clickhouse.table | quote }}
         livenessProbe:
           timeoutSeconds: 1
           initialDelaySeconds: 30
@@ -59,6 +46,14 @@ spec:
           initialDelaySeconds: 5
           tcpSocket:
             port: 9000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8123
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8123
         resources:
           requests:
             cpu: {{ .Values.clickhouse.resources.requests.cpu }}
