@@ -12,6 +12,7 @@ metadata:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9187"
 spec:
+  type: ClusterIP
   ports:
   - name: postgresql
     port: 5432
