@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        component: postgresql
     spec:
       {{- if .Values.postgresql.nodeSelector.enabled }}
       nodeSelector:

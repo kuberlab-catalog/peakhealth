@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       labels:
+        app: {{ template "fullname" . }}
         component: clickhouse
     spec:
       initContainers:
