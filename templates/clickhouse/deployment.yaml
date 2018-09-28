@@ -26,7 +26,6 @@ spec:
         volumeMounts:
         - name: clickhouse-data
           mountPath: /var/lib/clickhouse/
-          subPath: peakhealth-chdb
       containers:
       - name: clickhouse
         image: "{{ .Values.clickhouse.image }}"
@@ -64,7 +63,6 @@ spec:
         volumeMounts:
           - name: clickhouse-data
             mountPath: /var/lib/clickhouse/
-            subPath: peakhealth-chdb
           - name: config-volume
             mountPath: /etc/clickhouse-server/
       volumes:
