@@ -70,7 +70,7 @@ spec:
       volumes:
         - name: clickhouse-data
           persistentVolumeClaim:
-            claimName: {{ template "fullname" . }}
+            claimName: {{ template "clickhouse.fullname" . }}
         - name: config-volume
           configMap:
             name: {{ template "clickhouse.fullname" . }}

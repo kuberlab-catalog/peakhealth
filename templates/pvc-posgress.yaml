@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ template "pg.fullname" . }}
 spec:
   {{- if .Values.persistence.storageClass }}
   storageClassName: {{ .Values.persistence.storageClass }}
@@ -10,5 +10,6 @@ spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:
     requests:
-      storage: "{{ .Values.persistence.size }}"
+      storage: "{{ .Values.persistence.pg.size }}"
+    status: "True"
 {{- end }}

@@ -1,0 +1,14 @@
+{{- if .Values.persistence.fromProvider }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "clickhouse.fullname" . }}
+spec:
+  {{- if .Values.persistence.storageClass }}
+  storageClassName: {{ .Values.persistence.storageClass }}
+  {{- end }}
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: "{{ .Values.persistence.clickhouse.size }}"
+{{- end }}
