@@ -84,7 +84,7 @@ spec:
       - name: data
         {{- if .Values.persistence.fromProvider }}
         persistentVolumeClaim:
-          claimName: {{ template "pg.fullname" . }}
+          claimName: {{ template "postgresql.fullname" . }}
         {{- else }}
 {{ toYaml .Values.persistence.volume | indent 8 }}
         {{- end }}
